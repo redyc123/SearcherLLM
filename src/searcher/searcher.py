@@ -58,10 +58,11 @@ class Searcher:
             model_name="all-mpnet-base-v2",
             model_kwargs={'device': 'cuda'}
         )
-        return Chroma.from_documents(filter_complex_metadata(texts), embedings)
+        self.db = Chroma.from_documents(filter_complex_metadata(texts), embedings)
+        return self.db
 
     def llama_init(self) -> LlamaCpp:
-        llm = LlamaCpp(
+        self.llm = LlamaCpp(
             use_mlock=True,
             n_batch = 2048,
             # n_gpu_layers=100,
@@ -75,7 +76,7 @@ class Searcher:
             verbose=False,  # Verbose is required to pass to the callback manager
             stop=['\n'],
         )
-        return llm
+        return self.llm
 
     async def request(self, query: str) -> str:
         db = self.db
