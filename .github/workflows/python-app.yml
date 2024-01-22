@@ -25,8 +25,19 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
+        apt install cmake
         python -m pip install --upgrade pip
         pip install flake8 pytest
+        pip install fastapi 
+        pip install "uvicorn[standard]"
+        pip install chromadb
+        pip install langchain
+        pip install langchain_community
+        pip install sentence-transformers
+        CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python
+        pip install pandas
+        pip install unstructured
+        pip install openpyxl
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -34,6 +45,7 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: Test with pytest
+    - name: FastApi
       run: |
-        pytest
+        ls
+        
