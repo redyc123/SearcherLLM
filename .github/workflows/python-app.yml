@@ -41,7 +41,7 @@ jobs:
         pip install langchain
         pip install langchain_community
         pip install sentence-transformers
-        CMAKE_ARGS="-DLLAMA_CUBLAS=on" FORCE_CMAKE=1 pip install llama-cpp-python
+        pip install llama-cpp-python
         pip install pandas
         pip install unstructured
         pip install openpyxl
